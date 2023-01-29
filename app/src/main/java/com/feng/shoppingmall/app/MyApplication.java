@@ -1,6 +1,7 @@
 package com.feng.shoppingmall.app;
 
 import android.app.Application;
+import android.content.Context;
 
 /**
  * @项目名称：ShoppingMall
@@ -11,4 +12,14 @@ import android.app.Application;
  * @描述：
  **/
 public class MyApplication extends Application {
+    private static Context mContext;
+    public static Context getContext(){
+        return mContext;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mContext=this;
+    }
 }

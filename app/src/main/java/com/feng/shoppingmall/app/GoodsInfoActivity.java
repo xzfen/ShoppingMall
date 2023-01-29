@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.feng.shoppingmall.R;
 import com.feng.shoppingmall.home.adapter.HomeFragmentAdapter;
 import com.feng.shoppingmall.home.bean.GoodsBean;
+import com.feng.shoppingmall.shoppingcart.utils.CartStorage;
 import com.feng.shoppingmall.utils.Constants;
 
 import java.io.Serializable;
@@ -42,6 +43,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener{
     private TextView tv_more_search;
     private TextView tv_more_home;
     private TextView btn_more;
+    private GoodsBean goodsBean;
 
     /**
      * Find the Views in the layout<br />
@@ -105,6 +107,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener{
             }
         } else if ( v == btnGoodInfoAddcart ) {
             // Handle clicks for btnGoodInfoAddcart
+            CartStorage.getInstance().addData(goodsBean);
             Toast.makeText(this,"添加到购物车",Toast.LENGTH_SHORT).show();
         } else if ( v == tvGoodInfoCallcenter ) {
             // Handle clicks for tvGoodInfoCallcenter
@@ -146,7 +149,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_goods_info);
         findViews();
         //接收数据
-        GoodsBean goodsBean = (GoodsBean) getIntent().getSerializableExtra(HomeFragmentAdapter.GOODS_BEAN);
+        goodsBean = (GoodsBean) getIntent().getSerializableExtra(HomeFragmentAdapter.GOODS_BEAN);
         if (goodsBean!=null) {
             setDataForView(goodsBean);
         }

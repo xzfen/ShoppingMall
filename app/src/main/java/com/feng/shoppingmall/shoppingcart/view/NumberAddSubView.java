@@ -1,6 +1,7 @@
 package com.feng.shoppingmall.shoppingcart.view;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,8 +19,8 @@ public class NumberAddSubView extends LinearLayout implements View.OnClickListen
 
     public int getValue() {
         String countStr = tv_count.getText().toString().trim();//文本内容
-        if (countStr != null) {
-            value = Integer.valueOf(countStr);
+        if (!TextUtils.isEmpty(countStr)) {
+            value = Integer.parseInt(countStr);
         }
         return value;
     }
@@ -73,15 +74,10 @@ public class NumberAddSubView extends LinearLayout implements View.OnClickListen
         if (v.getId() == R.id.btn_add) {
             //加
             addNumber();
-            if (onNumberChangeListener != null) {
-                onNumberChangeListener.addNumber(v, value);
-            }
+
         } else {
             //减
             subNumber();
-            if (onNumberChangeListener != null) {
-                onNumberChangeListener.subNumner(v, value);
-            }
         }
     }
 
@@ -90,7 +86,9 @@ public class NumberAddSubView extends LinearLayout implements View.OnClickListen
             value -= 1;
         }
         setValue(value);
-
+        if (onNumberChangeListener != null) {
+            onNumberChangeListener.onNumberChange(value);
+        }
     }
 
     private void addNumber() {
@@ -98,13 +96,13 @@ public class NumberAddSubView extends LinearLayout implements View.OnClickListen
             value += 1;
         }
         setValue(value);
+        if (onNumberChangeListener != null) {
+            onNumberChangeListener.onNumberChange(value);
+        }
     }
-
+    //当数量发生变化的时候回调
     public interface OnNumberChangeListener {
-        //当按钮被点击的时候回调
-        void addNumber(View view, int value);
-
-        void subNumner(View view, int value);
+        void onNumberChange(int value);
     }
 
     private OnNumberChangeListener onNumberChangeListener;

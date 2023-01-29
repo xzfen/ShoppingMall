@@ -15,6 +15,19 @@ public class GoodsBean implements Serializable {
     private String figure;
     private String name;
     private String product_id;
+    /**
+     *  数量
+     * */
+    private int number = 1;
+
+    /**
+     * 是否处于编辑状态
+     */
+    private boolean isEditing;
+    /**
+     * 是否被选中
+     */
+    private boolean isChildSelected=true;
 
     public String getCover_price() {
         return cover_price;
@@ -48,6 +61,30 @@ public class GoodsBean implements Serializable {
         this.product_id = product_id;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public boolean isEditing() {
+        return isEditing;
+    }
+
+    public void setEditing(boolean editing) {
+        isEditing = editing;
+    }
+
+    public boolean isChildSelected() {
+        return isChildSelected;
+    }
+
+    public void setChildSelected(boolean childSelected) {
+        isChildSelected = childSelected;
+    }
+
     @Override
     public String toString() {
         return "GoodsBean{" +
@@ -55,6 +92,9 @@ public class GoodsBean implements Serializable {
                 ", figure='" + figure + '\'' +
                 ", name='" + name + '\'' +
                 ", product_id='" + product_id + '\'' +
+                ", number=" + number +
+                ", isEditing=" + isEditing +
+                ", isChildSelected=" + isChildSelected +
                 '}';
     }
 }
